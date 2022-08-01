@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ZipCodeRequest;
 use App\Models\ZipCode;
 use Illuminate\Http\Request;
 
 class ZipCodeController extends Controller
 {
-    public function get_data(Request $request, $zipcode){
+    public function get_data(ZipCodeRequest $request, $zipcode){
 
         $data = ZipCode::where('d_codigo',$zipcode)->get();
+
+        if(count($data) === 0){
+            return response()->json([
+                'message' => 'Zip code not found'
+            ],422);
+        }
 
         $federal_entity = array(
             "key"   => $data[0]->c_estado,
