@@ -18,13 +18,13 @@ class ZipCodeRequest extends FormRequest
      */
     public function authorize()
     {
-        if( !is_numeric(request()->route("zipcode")) ){
+        if( !is_numeric(request()->route("zip_code")) ){
             $response = response()->json([
                 'message' => 'Zip Code must be numeric'
             ], 422);
             throw new HttpResponseException($response);
         }
-        if( !preg_match('/^\d{5}$/', request()->route("zipcode")) ){
+        if( !preg_match('/^\d{5}$/', request()->route("zip_code")) ){
             $response = response()->json([
                 'message' => 'Zip Code must have five numbers'
             ], 422);

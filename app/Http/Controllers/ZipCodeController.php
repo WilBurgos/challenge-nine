@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ZipCodeController extends Controller
 {
-    public function get_data(ZipCodeRequest $request, $zipcode){
+    public function get_data(ZipCodeRequest $request, $zip_code){
 
-        $data = ZipCode::where('d_codigo',$zipcode)->get();
+        $data = ZipCode::where('d_codigo',$zip_code)->get();
 
         if(count($data) === 0){
             return response()->json([
@@ -42,7 +42,7 @@ class ZipCodeController extends Controller
         );
 
         $total = array(
-            "zip_code"          => $zipcode,
+            "zip_code"          => $zip_code,
             "locality"          => $data[0]->d_ciudad,
             "federal_entity"    => $federal_entity,
             "settlements"       => $settlements,
